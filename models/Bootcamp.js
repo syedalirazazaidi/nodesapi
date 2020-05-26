@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
-// const slugify = require('slugify');
-// const geocoder = require('../utils/geocoder');
+ const slugify = require('slugify');
+ const geocoder = require('../util/geocoder');
 
 const BootcampSchema = new mongoose.Schema(
   {
@@ -99,11 +99,11 @@ const BootcampSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    user: {
-      type: mongoose.Schema.ObjectId,
-      ref: "User",
-      required: true,
-    },
+    // user: {
+    //   type: mongoose.Schema.ObjectId,
+    //   ref: "User",
+    //   required: true,
+    // },
   },
   {
     toJSON: { virtuals: true },
@@ -112,6 +112,7 @@ const BootcampSchema = new mongoose.Schema(
 );
 
 // Create bootcamp slug from the name
+//mongoose middleware
 BootcampSchema.pre("save", function (next) {
   this.slug = slugify(this.name, { lower: true });
   next();

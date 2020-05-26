@@ -1,5 +1,6 @@
 const ErrorResponse=require('../util/errorResponse')
 const Bootcamp = require("../models/Bootcamp");
+const asyncHandler = require("../middleware/async")
 exports.getBootcamps = async(req, res, next) => {
  try{
    const bootcamps = await Bootcamp.find();
